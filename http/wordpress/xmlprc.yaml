@@ -2,7 +2,7 @@ id: xmlrpc
 info:
   name: Wordpress XML-RPC discovered
   author: pcasas
-  severity: info
+  severity: medium
   tags: wordpress-misc,wordpress
 
 http:
