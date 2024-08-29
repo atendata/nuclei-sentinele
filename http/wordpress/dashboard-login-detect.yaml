@@ -1,0 +1,22 @@
+id: dashboard-login-detect
+info:
+  name: Wordpress Dashboard Login
+  author: pcasas
+  severity: info
+  tags: wordpress-misc,wordpress
+http:
+  - method: GET
+    redirects: true
+    max-redirects: 2
+    stop-at-first-match: true
+
+    path:
+      - "{{BaseURL}}/wp-login.php"
+      - "{{BaseURL}}/wp-login"
+      - "{{BaseURL}}/wp-admin.php"
+      - "{{BaseURL}}/wp-admin"
+
+    matchers:
+      - type: status
+        status:
+          - 200

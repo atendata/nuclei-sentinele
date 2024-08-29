@@ -1,0 +1,27 @@
+id: api-users-detect
+info:
+  name: Wordpress Api Enumerate Users
+  author: pcasas
+  severity: high
+  tags: wordpress-misc,wordpress
+http:
+  - method: GET
+    redirects: false
+    stop-at-first-match: true
+
+    path:
+      - "{{BaseURL}}?rest_route=/wp/v2/users"
+      - "{{BaseURL}}?rest_route=/wp/v2/usErs"
+      - "{{BaseURL}}/wp-json/wp/v2/users"
+      - "{{BaseURL}}/wp-json/wp/v2/users/1"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: json
+        part: body
+        json:
+          - '.[].slug'

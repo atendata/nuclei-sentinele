@@ -1,0 +1,27 @@
+id: xmlrpc
+info:
+  name: Wordpress XML-RPC discovered
+  author: pcasas
+  severity: info
+  tags: wordpress-misc,wordpress
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/xmlrpc.php"
+
+    body: "<?xml version=\"1.0\" encoding=\"utf-8\"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "system.multicall"
+          - "system.listMethods"
+          - "demo.sayHello"
+        condition: and
+        part: body
